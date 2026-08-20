@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BotCats — FTC Team 30521</title>
+<meta name="description" content="BotCats, FIRST Tech Challenge Team 30521, San Jose CA. BIOBUZZ season 2026-2027.">
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="circuit-bg" aria-hidden="true"></div>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<header class="hero">
+  <div class="wrap hero-inner">
+    <div class="hero-logo">
+      <img src="assets/logo.png" alt="BotCats team logo — a robotic bobcat mascot">
+    </div>
+    <div class="hero-text">
+      <h1>BOTCATS</h1>
+      <div class="hero-meta">
+        <span class="badge">FTC #30521</span>
+        <span><strong>Union Middle School</strong> · San Jose, CA</span>
+        <span>BIOBUZZ<sup>&trade;</sup> Season · 2026&ndash;2027</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============================================================
+       ABOUT
+       ============================================================ -->
+  <section class="reveal" id="about">
+    <p class="eyebrow"><span class="node"></span> About</p>
+    <h2>A robotics team built to compete.</h2>
+    <p>
+      BotCats is a FIRST Tech Challenge team out of Union Middle School in San Jose,
+      drawing on Silicon Valley's talent pool to design, build, and program a
+      competition robot from scratch each season. We're currently deep into the
+      2026&ndash;2027 <strong>BIOBUZZ</strong> season, iterating on our robot's
+      mechanical design and driver-station software ahead of the fall qualifiers.
+    </p>
+    <p>
+      We're a hands-on team: students own CAD, wiring, and code, with mentors
+      guiding strategy and technical review rather than doing the work for them.
+    </p>
+  </section>
+
+  <!-- ============================================================
+       ROSTER
+       Edit the ROSTER array near the bottom of this file to add
+       teammates. Each entry needs a name and a role.
+       ============================================================ -->
+  <section class="reveal" id="roster">
+    <p class="eyebrow"><span class="node"></span> Roster</p>
+    <h2>The team</h2>
+    <div id="roster-mount"></div>
+  </section>
+
+  <!-- ============================================================
+       SPONSORS
+       Edit the SPONSORS array near the bottom of this file to add
+       a sponsor. `url` is optional — leave it out for a plain name.
+       ============================================================ -->
+  <section class="reveal" id="sponsors">
+    <p class="eyebrow"><span class="node"></span> Sponsors</p>
+    <h2>Backed by</h2>
+    <div id="sponsors-mount"></div>
+  </section>
+
+  <!-- ============================================================
+       CONTACT
+       ============================================================ -->
+  <section class="reveal" id="contact">
+    <p class="eyebrow"><span class="node"></span> Contact</p>
+    <h2>Get in touch</h2>
+    <p>We're actively looking for support with:</p>
+    <ul class="needs-list">
+      <li><span class="node"></span> Practice field space</li>
+      <li><span class="node"></span> Project management</li>
+      <li><span class="node"></span> Robot programming / software engineering</li>
+    </ul>
+    <div class="contact-box">
+      <a class="email-btn" id="contact-email" href="#" rel="nofollow">Loading email…</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  BotCats · FTC Team 30521 · San Jose, CA
+</footer>
+
+<script>
+  /* ============================================================
+     ROSTER
+     Add teammates here — this is the only place you need to edit.
+     role is optional.
+     Example:
+       { name: "Jordan Lee", role: "Build Lead" },
+     ============================================================ */
+  const ROSTER = [
+    // { name: "Your Name Here", role: "Captain" },
+  ];
+
+  /* ============================================================
+     SPONSORS
+     Add sponsors here. url is optional — omit for a plain name chip.
+     Example:
+       { name: "Acme Robotics", url: "https://example.com" },
+     ============================================================ */
+  const SPONSORS = [
+    // { name: "Sponsor Name", url: "https://example.com" },
+  ];
+
+  function renderRoster() {
+    const mount = document.getElementById('roster-mount');
+    if (!ROSTER.length) {
+      mount.innerHTML = '<div class="roster-empty">Roster coming soon — add teammates in the ROSTER list in index.html.</div>';
+      return;
+    }
+    const grid = document.createElement('div');
+    grid.className = 'roster-grid';
+    ROSTER.forEach(person => {
+      const card = document.createElement('div');
+      card.className = 'roster-card';
+      card.innerHTML = `<span class="name">${person.name}</span>` +
+        (person.role ? `<span class="role">${person.role}</span>` : '');
+      grid.appendChild(card);
+    });
+    mount.appendChild(grid);
+  }
+
+  function renderSponsors() {
+    const mount = document.getElementById('sponsors-mount');
+    if (!SPONSORS.length) {
+      mount.innerHTML = '<div class="sponsor-empty">No sponsors listed yet — add them in the SPONSORS list in index.html.</div>';
+      return;
+    }
+    const list = document.createElement('div');
+    list.className = 'sponsor-list';
+    SPONSORS.forEach(s => {
+      const chip = document.createElement('div');
+      chip.className = 'sponsor-chip';
+      chip.innerHTML = s.url
+        ? `<a href="${s.url}" target="_blank" rel="noopener">${s.name}</a>`
+        : s.name;
+      list.appendChild(chip);
+    });
+    mount.appendChild(list);
+  }
+
+  /* Masked contact email — assembled at runtime so plain-text
+     scrapers won't pick it up from the page source. */
+  function renderEmail() {
+    const user = "teambotcats";
+    const domain = "gmail.com";
+    const link = document.getElementById('contact-email');
+    link.href = `mailto:${user}@${domain}`;
+    link.textContent = `${user}@${domain}`;
+  }
+
+  renderRoster();
+  renderSponsors();
+  renderEmail();
+
+  /* Subtle reveal-on-scroll */
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('is-visible'));
+  }
+</script>
+
+</body>
+</html>
